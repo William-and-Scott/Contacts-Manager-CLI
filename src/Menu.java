@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,8 +19,16 @@ public class Menu {
         System.out.print("Enter an option (1, 2, 3, 4 or 5): ");
     }
 
-    public void populateArraylistFromFile () {
-
+    public void populateArraylistFromFile (Path dataFile) {
+        try {
+            List<String> tempContactList = Files.readAllLines(dataFile);
+            for (int i = 0; i < tempContactList.size(); i++) {
+                String [] chopString = tempContactList.get(i).split(" , ");
+                contactList.add(new Contact(chopString[0], chopString[1]));
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void updateFile () {

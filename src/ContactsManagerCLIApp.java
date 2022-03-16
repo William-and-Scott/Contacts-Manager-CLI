@@ -20,10 +20,11 @@ public class ContactsManagerCLIApp {
         Contact william = new Contact("William", "8675309");
 
 
-        createDirectoryAndFile();
-//        Menu.printMenu();
-        menu.addContact();
-        menu.addContact();
+//        createDirectoryAndFile();
+////        Menu.printMenu();
+//        menu.addContact();
+//        menu.addContact();
+        menu.populateArraylistFromFile(dataFile);
         menu.printArrayList();
 
 
