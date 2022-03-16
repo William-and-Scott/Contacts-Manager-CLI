@@ -9,6 +9,7 @@ public class Menu {
 
     private Input input = new Input();
     private List<Contact> contactList = new ArrayList<>();
+    private boolean runProgram = true;
 
     public static void printMenu () {
         System.out.println("1. View contacts.");
@@ -17,6 +18,28 @@ public class Menu {
         System.out.println("4. Delete an existing contact.");
         System.out.println("5. Exit.");
         System.out.print("Enter an option (1, 2, 3, 4 or 5): ");
+    }
+
+    public void getUserChoice () {
+        int userChoice = input.getInt(1, 5);
+
+        switch (userChoice) {
+            case 1 :
+                printArrayList();
+                break;
+            case 2 :
+                addContact();
+                break;
+            case 3 :
+                System.out.println("option 3");
+                break;
+            case 4 :
+                System.out.println("option 4");
+                break;
+            default:
+                runProgram = false;
+                break;
+        }
     }
 
     public void populateArraylistFromFile (Path dataFile) {
@@ -37,11 +60,19 @@ public class Menu {
 
     public void addContact () {
 
-        String contactName = input.getString("Enter contact name: ");
-        String contactNumber = input.getString("Enter contact phone number (without dashes or spaces): ");
+        do {
+            String contactName = input.getString("Enter contact name: ");
+            String contactNumber = input.getString("Enter contact phone number (without dashes or spaces): ");
 
-        contactList.add(new Contact(contactName, contactNumber));
+            contactList.add(new Contact(contactName, contactNumber));
 
+            if (!(input.yesNo("Make another contact?"))) {
+                break;
+            }
+        } while (true);
+
+
+        runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
 
     public void deleteContact (Contact contact){
@@ -52,6 +83,8 @@ public class Menu {
         for (Contact contact : contactList) {
             System.out.println("Name: " + contact.getFullName() + ", Phone number: " + contact.getPhoneNumber());
         }
+
+        runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
 
     //accessors
@@ -63,5 +96,9 @@ public class Menu {
 
     public void setContactList(List<Contact> contactList) {
         this.contactList = contactList;
+    }
+
+    public boolean isRunProgram() {
+        return runProgram;
     }
 }

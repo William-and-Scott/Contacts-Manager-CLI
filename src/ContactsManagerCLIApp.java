@@ -19,13 +19,20 @@ public class ContactsManagerCLIApp {
         Menu menu = new Menu();
         Contact william = new Contact("William", "8675309");
 
+        menu.populateArraylistFromFile(dataFile);
+
+        do {
+            Menu.printMenu();
+            menu.getUserChoice();
+            System.out.println();
+        } while (menu.isRunProgram());
+
 
 //        createDirectoryAndFile();
-////        Menu.printMenu();
 //        menu.addContact();
 //        menu.addContact();
-        menu.populateArraylistFromFile(dataFile);
-        menu.printArrayList();
+//        menu.printArrayList();
+
 
 
 
