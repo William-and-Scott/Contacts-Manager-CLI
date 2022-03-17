@@ -54,8 +54,20 @@ public class Menu {
         }
     }
 
-    public void updateFile () {
+    public void updateFile (Path dataFile) {
+        try {
+            List<String> writeContactsToFile = new ArrayList<>();
+            for(Contact contact : contactList) {
+                writeContactsToFile.add(toString(contact));
+                Files.write(dataFile, writeContactsToFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public String toString (Contact contact) {
+        return contact.getFullName() + " , " + contact.getPhoneNumber();
     }
 
     public void addContact () {

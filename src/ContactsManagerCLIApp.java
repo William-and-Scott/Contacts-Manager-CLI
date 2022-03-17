@@ -26,15 +26,12 @@ public class ContactsManagerCLIApp {
             menu.getUserChoice();
             System.out.println();
         } while (menu.isRunProgram());
-
+        menu.updateFile(dataFile);
 
 //        createDirectoryAndFile();
 //        menu.addContact();
 //        menu.addContact();
 //        menu.printArrayList();
-
-
-
 
 
     }
@@ -44,7 +41,7 @@ public class ContactsManagerCLIApp {
         Path dataDirectory = Paths.get("data");
 
         try {
-            if (!(Files.exists(dataDirectory))){
+            if (!(Files.exists(dataDirectory))) {
                 Files.createDirectory(dataDirectory);
             }
         } catch (IOException e) {
@@ -52,7 +49,7 @@ public class ContactsManagerCLIApp {
         }
 
         try {
-            if (!(Files.exists(dataFile))){
+            if (!(Files.exists(dataFile))) {
                 Files.createFile(dataFile);
             }
         } catch (IOException e) {
