@@ -31,10 +31,10 @@ public class Menu {
                 addContact();
                 break;
             case 3 :
-                System.out.println("option 3");
+                searchContact();
                 break;
             case 4 :
-                System.out.println("option 4");
+                deleteContact();
                 break;
             default:
                 runProgram = false;
@@ -74,9 +74,29 @@ public class Menu {
 
         runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
+    //dual purpose, could search and delete
+    public void searchContact () {
+        String searchedName = input.getString("Enter a contacts name: ");
+        int count = 0;
 
-    public void deleteContact (Contact contact){
+        for (int i = 0; i < contactList.size(); i++) {
+            if (contactList.get(i).getFullName().contains(searchedName)) {
+                count++;
+                System.out.println((i+1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + contactList.get(i).getPhoneNumber());
+            }
+        }
+        if (count == 0) {
+            System.out.println("Could not find contact with that name.");
+        }
+    }
 
+    public void deleteContact () {
+        searchContact();
+
+        int userDeleteChoice = input.getInt("Enter number of contact you want to delete: ");
+        contactList.remove(userDeleteChoice - 1);
+
+        runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
 
     public void printArrayList () {
