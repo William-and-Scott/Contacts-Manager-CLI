@@ -74,7 +74,7 @@ public class Menu {
 
         do {
             String contactName = input.getString("Enter contact name: ");
-            String contactNumber = input.getString("Enter contact phone number (without dashes or spaces): ");
+            String contactNumber = phoneNumberValidator();
 
             contactList.add(new Contact(contactName, contactNumber));
 
@@ -133,6 +133,16 @@ public class Menu {
         } else {
             return number.substring(0,3) + dash + number.substring(3,6) + dash + number.substring(6);
         }
+    }
+
+    public String phoneNumberValidator () {
+        String phoneNumber = input.getString("Enter contact phone number (without dashes or spaces): ");
+
+        if (phoneNumber.length() == 7 || phoneNumber.length() == 10) {
+            return phoneNumber;
+        }
+        System.out.println("Phone number must be 7 or 10 digits long!");
+        return phoneNumberValidator();
     }
     //accessors
 
