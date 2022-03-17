@@ -11,13 +11,13 @@ public class ContactsManagerCLIApp {
 
     public static void main(String[] args) {
 
-        //initalize the array list
-        //read from the contacts file
-        //do changes
-        //write the arraylist back to the contacts file
+        runProgram();
+    }
+
+    public static void runProgram () {
+        createDirectoryAndFile();
 
         Menu menu = new Menu();
-        Contact william = new Contact("William", "8675309");
 
         menu.populateArraylistFromFile(dataFile);
 
@@ -27,13 +27,6 @@ public class ContactsManagerCLIApp {
             System.out.println();
         } while (menu.isRunProgram());
         menu.updateFile(dataFile);
-
-//        createDirectoryAndFile();
-//        menu.addContact();
-//        menu.addContact();
-//        menu.printArrayList();
-
-
     }
 
     public static void createDirectoryAndFile() {

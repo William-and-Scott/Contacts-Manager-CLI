@@ -74,12 +74,8 @@ public class Menu {
     public void addContact () {
 
         do {
-            String contactName = input.getString("Enter contact name: ");
+            String contactName = fullNameValidator();
             String contactNumber = phoneNumberValidator();
-
-
-
-
 
             for (Contact contact : contactList) {
                 if (contact.getFullName().equalsIgnoreCase(contactName)) {
@@ -91,9 +87,6 @@ public class Menu {
                 }
             }
             contactList.add(new Contact(contactName, contactNumber));
-
-//                else
-//            }
 
             if (!(input.yesNo("Make another contact?"))) {
                 break;
@@ -111,7 +104,7 @@ public class Menu {
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).getFullName().toLowerCase().contains(searchedName.toLowerCase())) {
                 count++;
-                System.out.println((i+1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + contactList.get(i).getPhoneNumber());
+                System.out.println((i+1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + formatNumber(contactList.get(i).getPhoneNumber()));
             }
         }
         if (count == 0) {
@@ -120,7 +113,7 @@ public class Menu {
         }
         return true;
     }
-    // TODO: the delete method will still ask for a contact to delete even if the search method couldnt find any contacts with that name.
+
     public void deleteContact () {
         if (searchContact()){
             int userDeleteChoice = input.getInt("Enter number of contact you want to delete: ");
@@ -132,8 +125,9 @@ public class Menu {
     public void printArrayList () {
         String nameColumn = "Name";
         String numColumn = "Phone Number";
+
         System.out.printf("%-20s | %12s |\n", nameColumn, numColumn);
-//        String dash = "-";
+
         for (int i = 0; i < 37; i++) {
             System.out.print("-");
         }
@@ -163,10 +157,23 @@ public class Menu {
             }
             System.out.println("Phone number must be 7 or 10 digits long!");
         }
-
     }
-    //accessors
 
+    public String fullNameValidator () {
+        while (true) {
+            String fullName = input.getString("Enter full name: ");
+
+            if (fullName.length() > 0 && fullName.length() <= 20) {
+                return fullName;
+            }
+            if (fullName.length() == 0) {
+                System.out.println("Name cannot be empty.");
+            }
+            else System.out.println("Max 20 character, please abbreviate your first name.");
+        }
+    }
+
+    //accessors
 
     public List<Contact> getContactList() {
         return contactList;
