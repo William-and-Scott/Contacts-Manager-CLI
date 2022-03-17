@@ -59,8 +59,8 @@ public class Menu {
             List<String> writeContactsToFile = new ArrayList<>();
             for(Contact contact : contactList) {
                 writeContactsToFile.add(toString(contact));
-                Files.write(dataFile, writeContactsToFile);
             }
+            Files.write(dataFile, writeContactsToFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
