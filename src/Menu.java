@@ -112,8 +112,15 @@ public class Menu {
     }
 
     public void printArrayList () {
+        String nameColumn = "Name";
+        String numColumn = "Phone Number";
+        System.out.printf("%-20s | %12s |\n", nameColumn, numColumn);
+//        String dash = "-";
+        for (int i = 0; i < 37; i++) {
+            System.out.print("-");
+        }
         for (Contact contact : contactList) {
-            System.out.println("Name: " + contact.getFullName() + ", Phone number: " + contact.getPhoneNumber());
+            System.out.printf("\n%-20s | %-12s |\n", contact.getFullName(), contact.getPhoneNumber());
         }
 
         runProgram = input.yesNo("Do you want to make another selection? (y/n) ");

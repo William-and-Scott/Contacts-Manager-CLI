@@ -36,7 +36,7 @@ import java.util.Scanner;
                 int userNum = getInt();
 
                 if (min <= userNum && userNum <= max) {
-                    System.out.println("Valid!");
+//                    System.out.println("Valid!");
                     return userNum;
                 }
                 System.out.println("Invalid.");
@@ -51,7 +51,7 @@ import java.util.Scanner;
                 int userNum = getInt();
 
                 if (min <= userNum && userNum <= max) {
-                    System.out.println("Valid!");
+//                    System.out.println("Valid!");
                     return userNum;
                 }
                 System.out.println("Invalid.");
@@ -81,7 +81,7 @@ import java.util.Scanner;
                 double userNum = getDouble();
 
                 if (min <= userNum && userNum <= max) {
-                    System.out.println("Valid!");
+//                    System.out.println("Valid!");
                     return userNum;
                 }
                 System.out.println("Invalid.");
