@@ -120,12 +120,20 @@ public class Menu {
             System.out.print("-");
         }
         for (Contact contact : contactList) {
-            System.out.printf("\n%-20s | %-12s |\n", contact.getFullName(), contact.getPhoneNumber());
+            System.out.printf("\n%-20s | %-12s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()));
         }
 
         runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
 
+    public String formatNumber (String number) {
+        String dash = "-";
+        if (number.length() == 7) {
+           return number.substring(0,3) + dash + number.substring(3);
+        } else {
+            return number.substring(0,3) + dash + number.substring(3,6) + dash + number.substring(6);
+        }
+    }
     //accessors
 
 
