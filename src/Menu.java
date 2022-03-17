@@ -32,6 +32,7 @@ public class Menu {
                 break;
             case 3 :
                 searchContact();
+                runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
                 break;
             case 4 :
                 deleteContact();
@@ -76,7 +77,23 @@ public class Menu {
             String contactName = input.getString("Enter contact name: ");
             String contactNumber = phoneNumberValidator();
 
+
+
+
+
+            for (Contact contact : contactList) {
+                if (contact.getFullName().equalsIgnoreCase(contactName)) {
+                    if (input.yesNo("This entry already exists, would you like to overwrite it? (y/n): ")) {
+                    contact.setFullName(contactName);
+                    contact.setPhoneNumber(contactNumber);
+                }
+                    return;
+                }
+            }
             contactList.add(new Contact(contactName, contactNumber));
+
+//                else
+//            }
 
             if (!(input.yesNo("Make another contact?"))) {
                 break;
@@ -87,27 +104,28 @@ public class Menu {
         runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
     //dual purpose, could search and delete
-    public void searchContact () {
+    public boolean searchContact () {
         String searchedName = input.getString("Enter a contacts name: ");
         int count = 0;
 
         for (int i = 0; i < contactList.size(); i++) {
-            if (contactList.get(i).getFullName().contains(searchedName)) {
+            if (contactList.get(i).getFullName().toLowerCase().contains(searchedName.toLowerCase())) {
                 count++;
                 System.out.println((i+1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + contactList.get(i).getPhoneNumber());
             }
         }
         if (count == 0) {
             System.out.println("Could not find contact with that name.");
+            return false;
         }
+        return true;
     }
-
+    // TODO: the delete method will still ask for a contact to delete even if the search method couldnt find any contacts with that name.
     public void deleteContact () {
-        searchContact();
-
-        int userDeleteChoice = input.getInt("Enter number of contact you want to delete: ");
-        contactList.remove(userDeleteChoice - 1);
-
+        if (searchContact()){
+            int userDeleteChoice = input.getInt("Enter number of contact you want to delete: ");
+            contactList.remove(userDeleteChoice - 1);
+        }
         runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
     }
 
@@ -119,8 +137,9 @@ public class Menu {
         for (int i = 0; i < 37; i++) {
             System.out.print("-");
         }
+        System.out.println();
         for (Contact contact : contactList) {
-            System.out.printf("\n%-20s | %-12s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()));
+            System.out.printf("%-20s | %-12s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()));
         }
 
         runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
@@ -136,13 +155,15 @@ public class Menu {
     }
 
     public String phoneNumberValidator () {
-        String phoneNumber = input.getString("Enter contact phone number (without dashes or spaces): ");
+        while (true) {
+            String phoneNumber = String.valueOf(input.getInt("Enter contact phone number (without dashes or spaces): "));
 
-        if (phoneNumber.length() == 7 || phoneNumber.length() == 10) {
-            return phoneNumber;
+            if (phoneNumber.length() == 7 || phoneNumber.length() == 10) {
+                return phoneNumber;
+            }
+            System.out.println("Phone number must be 7 or 10 digits long!");
         }
-        System.out.println("Phone number must be 7 or 10 digits long!");
-        return phoneNumberValidator();
+
     }
     //accessors
 
