@@ -1,3 +1,5 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,14 +12,26 @@ public class Menu {
     private Input input = new Input();
     private List<Contact> contactList = new ArrayList<>();
     private boolean runProgram = true;
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+//    public static final String ANSI_GREEN_TEXT = "\u001B[32m";
+    public static final String ANSI_GREEN_TEXT = "\033[1;32m";
+    public static final String ANSI_RESET = "\u001B[0m";
+//    public static final AnsiColor BRIGHT_GREEN;
 
     public static void printMenu () {
-        System.out.println("1. View contacts.");
-        System.out.println("2. Add a new contact.");
-        System.out.println("3. Search a contact by name.");
-        System.out.println("4. Delete an existing contact.");
-        System.out.println("5. Exit.");
-        System.out.print("Enter an option (1, 2, 3, 4 or 5): ");
+        System.out.println(ANSI_BLACK_BACKGROUND + ANSI_GREEN_TEXT);
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+        System.out.println("|             Main Menu             |");
+        System.out.println("|-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-|");
+        System.out.println("| 1. View contacts.                 |");
+        System.out.println("| 2. Add a new contact.             |");
+        System.out.println("| 3. Search a contact by name.      |");
+        System.out.println("| 4. Delete an existing contact.    |");
+        System.out.println("| 5. Exit.                          |");
+        System.out.println("|                                   |");
+        System.out.println("|Enter an option (1, 2, 3, 4 or 5): |");
+        System.out.println("~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+        System.out.println(ANSI_RESET);
     }
 
     public void getUserChoice () {
