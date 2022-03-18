@@ -170,7 +170,7 @@ public class Menu {
     public String phoneNumberValidator () {
         while (true) {
             String phoneNumber = String.valueOf(input.getLong("Enter contact phone number (without dashes or spaces): "));
-            System.out.println(phoneNumber);
+
             if (phoneNumber.length() == 7 || phoneNumber.length() == 10) {
                 return phoneNumber;
             }
