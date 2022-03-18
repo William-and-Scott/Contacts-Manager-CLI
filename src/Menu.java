@@ -45,7 +45,7 @@ public class Menu {
                 break;
             case 4:
                 searchContact();
-                runProgram = input.yesNo("Return to main menu? (y/n): ");
+                input.getString("Press enter to continue back to the main menu. ");
                 break;
             case 5:
                 deleteContact();
@@ -112,7 +112,7 @@ public class Menu {
         } while (true);
 
 
-        runProgram = input.yesNo("Return to main menu? (y/n): ");
+        input.getString("Press enter to continue back to the main menu. ");
     }
 
     //dual purpose, could search and delete
@@ -124,13 +124,13 @@ public class Menu {
         String nameColumn = "Name";
         String numColumn = "Phone Number";
         String favColumn = "Favorite";
-        for (int i = 0; i < 56; i++) {
+        for (int i = 0; i < 53; i++) {
             System.out.print("_");
         }
-        System.out.printf("\n| %-26s | %12s | %8s |\n", nameColumn, numColumn, favColumn);
+        System.out.printf("\n| %-23s | %12s | %8s |\n", nameColumn, numColumn, favColumn);
 
         System.out.print("|");
-        for (int j = 0; j < 54; j++) {
+        for (int j = 0; j < 51; j++) {
             System.out.print("-");
         }
         System.out.println("|");
@@ -138,11 +138,12 @@ public class Menu {
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).getFullName().toLowerCase().contains(searchedName.toLowerCase())) {
                 count++;
-                System.out.printf("| %s. %-23s | %-12s | %8s |\n", i+1, contactList.get(i).getFullName(), formatNumber(contactList.get(i).getPhoneNumber()), contactList.get(i).isFavorite());
+                String tempName = (i + 1) + ". " + contactList.get(i).getFullName();
+                System.out.printf("| %-23s | %-12s | %8s |\n", tempName, formatNumber(contactList.get(i).getPhoneNumber()), contactList.get(i).isFavorite());
             }
         }
 
-        for (int i = 0; i < 56; i++) {
+        for (int i = 0; i < 53; i++) {
             System.out.print("-");
         }
         System.out.println();
@@ -162,7 +163,7 @@ public class Menu {
                 contactList.remove(userDeleteChoice - 1);
             }
         }
-        runProgram = input.yesNo("Return to main menu? (y/n): ");
+        input.getString("Press enter to continue back to the main menu. ");
     }
 
     public void printArrayList() {
@@ -191,7 +192,7 @@ public class Menu {
             System.out.print("-");
         }
         System.out.println();
-        runProgram = input.yesNo("Return to main menu? (y/n): ");
+        input.getString("Press enter to continue back to the main menu. ");
     }
 
     private void printFavoriteList() {
@@ -223,7 +224,7 @@ public class Menu {
         if (count == 0) {
             System.out.println("Could not find any favorites.");
         }
-        runProgram = input.yesNo("Return to main menu? (y/n): ");
+        input.getString("Press enter to continue back to the main menu. ");
     }
 
     public String formatNumber(String number) {
