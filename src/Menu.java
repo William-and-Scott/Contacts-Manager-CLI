@@ -22,16 +22,17 @@ public class Menu {
         System.out.println("| 1. View contacts.                 |");
         System.out.println("| 2. View favorites.                |");
         System.out.println("| 3. Add a new contact.             |");
-        System.out.println("| 4. Search a contact by name.      |");
-        System.out.println("| 5. Delete an existing contact.    |");
-        System.out.println("| 6. Exit.                          |");
+        System.out.println("| 4. Edit contact.                  |");
+        System.out.println("| 5. Search a contact by name.      |");
+        System.out.println("| 6. Delete an existing contact.    |");
+        System.out.println("| 7. Exit.                          |");
         System.out.println("|___________________________________|\n");
         System.out.print("Enter an option (1, 2, 3, 4, 5 or 6): ");
 
     }
 
     public void getUserChoice() {
-        int userChoice = input.getInt(1, 6);
+        int userChoice = input.getInt(1, 7);
 
         switch (userChoice) {
             case 1:
@@ -44,10 +45,13 @@ public class Menu {
                 addContact();
                 break;
             case 4:
+                editContact();
+                break;
+            case 5:
                 searchContact();
                 input.getString("Press enter to continue back to the main menu. ");
                 break;
-            case 5:
+            case 6:
                 deleteContact();
                 break;
             default:
@@ -164,6 +168,21 @@ public class Menu {
             }
         }
         input.getString("Press enter to continue back to the main menu. ");
+    }
+
+    public void editContact() {
+        if (searchContact()) {
+            int userEditChoice = input.getInt("Enter number of the contact you want to edit (0 if you want to abort delete process): ");
+            if (!(userEditChoice == 0)) {
+                String contactName = fullNameValidator();
+                String contactNumber = phoneNumberValidator();
+                String isFavorite = isFavoriteValidator();
+
+                contactList.get(userEditChoice - 1).setFullName(contactName);
+                contactList.get(userEditChoice -1).setPhoneNumber(contactNumber);
+                contactList.get(userEditChoice -1).setFavorite(isFavorite);
+            }
+        }
     }
 
     public void printArrayList() {
