@@ -3,9 +3,7 @@ import jdk.swing.interop.SwingInterOpUtils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
 
@@ -168,6 +166,7 @@ public class Menu {
     }
 
     public void printArrayList() {
+        alphabetizeList(contactList);
         String nameColumn = "Name";
         String numColumn = "Phone Number";
         String favColumn = "Favorite";
@@ -196,6 +195,7 @@ public class Menu {
     }
 
     private void printFavoriteList() {
+        alphabetizeList(contactList);
         int count = 0;
         String nameColumn = "Name";
         String numColumn = "Phone Number";
@@ -264,6 +264,15 @@ public class Menu {
             return "true";
         }
         return "false";
+    }
+
+    public void alphabetizeList (List<Contact> contact) {
+        Collections.sort(contact, new Comparator<Contact>() {
+            @Override
+            public int compare(Contact o1, Contact o2) {
+                return o1.getFullName().compareTo(o2.getFullName());
+            }
+        });
     }
 
     //accessors
