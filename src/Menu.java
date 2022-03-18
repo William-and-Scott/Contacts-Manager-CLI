@@ -34,8 +34,9 @@ public class Menu {
         System.out.print("        |     |    | 2. View favorites.                |    |    |    |\n");
         System.out.print("        |     |    | 3. Add a new contact.             |    |    |    |\n");
         System.out.print("        |     |    | 4. Search a contact by name.      |    |    |    |\n");
-        System.out.print("        |     |    | 5. Delete an existing contact.    |    |    |    |\n");
-        System.out.print("        |     |    | 6. Exit.                          |    |    |    |    a project by William and Scott\n");
+        System.out.println("      |     |    | 5. Edit a contact by name.        |    |    |    |\n");
+        System.out.print("        |     |    | 6. Delete an existing contact.    |    |    |    |\n");
+        System.out.print("        |     |    | 7. Exit.                          |    |    |    |    a project by William and Scott\n");
         System.out.print("        |     |    |___________________________________|    |    |    |======================================================D=\n");
         System.out.print("        |     |                                             |    |    |\n");
         System.out.print("        |     |    Enter an option (1, 2, 3, 4, 5 or 6):    |    |    |\n");
