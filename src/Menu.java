@@ -15,39 +15,43 @@ public class Menu {
 
     public static final String ANSI_GREEN_TEXT = "\033[1;32m";
 
-    public static void printMenu () {
+    public static void printMenu() {
         System.out.println(ANSI_GREEN_TEXT);
 
         System.out.println("_____________________________________");
         System.out.println("|  ☎           Main Menu            |");
         System.out.println("|___________________________________|");
-        System.out.println("| 1. View contacts                  |");
-        System.out.println("| 2. Add a new contact.             |");
-        System.out.println("| 3. Search a contact by name.      |");
-        System.out.println("| 4. Delete an existing contact.    |");
-        System.out.println("| 5. Exit.                          |");
-        System.out.println("|___________________________________|");
-        System.out.println(" Enter an option (1, 2, 3, 4 or 5):  ");
+        System.out.println("| 1. View contacts.                 |");
+        System.out.println("| 2. View favorites.                |");
+        System.out.println("| 3. Add a new contact.             |");
+        System.out.println("| 4. Search a contact by name.      |");
+        System.out.println("| 5. Delete an existing contact.    |");
+        System.out.println("| 6. Exit.                          |");
+        System.out.println("|___________________________________|\n");
+        System.out.println(" Enter an option (1, 2, 3, 4, 5 or 6):  ");
 
 
         System.out.println();
     }
 
-    public void getUserChoice () {
+    public void getUserChoice() {
         int userChoice = input.getInt(1, 5);
 
         switch (userChoice) {
-            case 1 :
+            case 1:
                 printArrayList();
                 break;
-            case 2 :
+            case 2:
+                printFavoriteList();
+                break;
+            case 3:
                 addContact();
                 break;
-            case 3 :
+            case 4:
                 searchContact();
                 runProgram = input.yesNo("Return to main menu? (y/n): ");
                 break;
-            case 4 :
+            case 5:
                 deleteContact();
                 break;
             default:
@@ -56,22 +60,24 @@ public class Menu {
         }
     }
 
-    public void populateArraylistFromFile (Path dataFile) {
+
+
+    public void populateArraylistFromFile(Path dataFile) {
         try {
             List<String> tempContactList = Files.readAllLines(dataFile);
             for (int i = 0; i < tempContactList.size(); i++) {
-                String [] chopString = tempContactList.get(i).split(" , ");
-                contactList.add(new Contact(chopString[0], chopString[1] , chopString[2]));
+                String[] chopString = tempContactList.get(i).split(" , ");
+                contactList.add(new Contact(chopString[0], chopString[1], chopString[2]));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void updateFile (Path dataFile) {
+    public void updateFile(Path dataFile) {
         try {
             List<String> writeContactsToFile = new ArrayList<>();
-            for(Contact contact : contactList) {
+            for (Contact contact : contactList) {
                 writeContactsToFile.add(toString(contact));
             }
             Files.write(dataFile, writeContactsToFile);
@@ -80,11 +86,11 @@ public class Menu {
         }
     }
 
-    public String toString (Contact contact) {
+    public String toString(Contact contact) {
         return contact.getFullName() + " , " + contact.getPhoneNumber() + " , " + contact.isFavorite();
     }
 
-    public void addContact () {
+    public void addContact() {
 
         do {
             String contactName = fullNameValidator();
@@ -92,14 +98,13 @@ public class Menu {
             String isFavorite = isFavoriteValidator();
 
 
-
             for (Contact contact : contactList) {
                 if (contact.getFullName().equalsIgnoreCase(contactName)) {
                     if (input.yesNo("This entry already exists, would you like to overwrite it? (y/n): ")) {
-                    contact.setFullName(contactName);
-                    contact.setPhoneNumber(contactNumber);
-                    contact.setFavorite(isFavorite);
-                }
+                        contact.setFullName(contactName);
+                        contact.setPhoneNumber(contactNumber);
+                        contact.setFavorite(isFavorite);
+                    }
                     return;
                 }
             }
@@ -113,15 +118,16 @@ public class Menu {
 
         runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
+
     //dual purpose, could search and delete
-    public boolean searchContact () {
+    public boolean searchContact() {
         String searchedName = input.getString("Enter a contacts name: ");
         int count = 0;
 
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).getFullName().toLowerCase().contains(searchedName.toLowerCase())) {
                 count++;
-                System.out.println((i+1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + formatNumber(contactList.get(i).getPhoneNumber()));
+                System.out.println((i + 1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + formatNumber(contactList.get(i).getPhoneNumber()));
             }
         }
         if (count == 0) {
@@ -131,15 +137,15 @@ public class Menu {
         return true;
     }
 
-    public void deleteContact () {
-        if (searchContact()){
+    public void deleteContact() {
+        if (searchContact()) {
             int userDeleteChoice = input.getInt("Enter number of the contact you want to delete: ");
             contactList.remove(userDeleteChoice - 1);
         }
         runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
 
-    public void printArrayList () {
+    public void printArrayList() {
         String nameColumn = "Name";
         String numColumn = "Phone Number";
         String favColumn = "Favorite";
@@ -167,16 +173,47 @@ public class Menu {
         runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
 
-    public String formatNumber (String number) {
+    private void printFavoriteList() {
+        int count = 0;
+        String nameColumn = "Name";
+        String numColumn = "Phone Number";
+        String favColumn = "Favorite";
+        for (int i = 0; i < 50; i++) {
+            System.out.print("_");
+        }
+        System.out.printf("\n| %-20s | %12s | %8s |\n", nameColumn, numColumn, favColumn);
+
+        System.out.print("|");
+        for (int j = 0; j < 48; j++) {
+            System.out.print("-");
+        }
+        System.out.println("|");
+        for (Contact contact : contactList) {
+            if (contact.getFavorite().contains("true")) {
+                count++;
+                System.out.printf("| %-20s | %-12s | %-8s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()), contact.getFavorite());
+            }
+        }
+        for (int i = 0; i < 50; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+        if (count == 0) {
+            System.out.println("Could not find any favorites.");
+        }
+        runProgram = input.yesNo("Return to main menu? (y/n): ");
+    }
+
+    public String formatNumber(String number) {
         String dash = "-";
         if (number.length() == 7) {
-           return number.substring(0,3) + dash + number.substring(3);
+            return number.substring(0, 3) + dash + number.substring(3);
         } else {
-            return number.substring(0,3) + dash + number.substring(3,6) + dash + number.substring(6);
+            return number.substring(0, 3) + dash + number.substring(3, 6) + dash + number.substring(6);
         }
     }
 
-    public String phoneNumberValidator () {
+    public String phoneNumberValidator() {
         while (true) {
             String phoneNumber = String.valueOf(input.getLong("Enter contact phone number (without dashes or spaces): "));
 
@@ -187,7 +224,7 @@ public class Menu {
         }
     }
 
-    public String fullNameValidator () {
+    public String fullNameValidator() {
         while (true) {
             String fullName = input.getString("Enter full name: ");
 
@@ -196,12 +233,11 @@ public class Menu {
             }
             if (fullName.length() == 0) {
                 System.out.println("Name cannot be empty.");
-            }
-            else System.out.println("Max 20 character, please abbreviate your first name.");
+            } else System.out.println("Max 20 character, please abbreviate your first name.");
         }
     }
 
-    public String isFavoriteValidator () {
+    public String isFavoriteValidator() {
         if (input.yesNo("Is this contact a favorite?")) {
             return "true";
         }

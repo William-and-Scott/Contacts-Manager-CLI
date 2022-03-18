@@ -34,6 +34,10 @@ public class Contact {
         return isFavorite;
     }
 
+    public String getFavorite() {
+        return isFavorite;
+    }
+
     public void setFavorite(String favorite) {
         isFavorite = favorite;
     }
