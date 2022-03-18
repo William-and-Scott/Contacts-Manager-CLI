@@ -30,8 +30,6 @@ public class Menu {
         System.out.println("|___________________________________|\n");
         System.out.print("Enter an option (1, 2, 3, 4, 5 or 6): ");
 
-
-
     }
 
     public void getUserChoice() {
@@ -161,8 +159,10 @@ public class Menu {
 
     public void deleteContact() {
         if (searchContact()) {
-            int userDeleteChoice = input.getInt("Enter number of the contact you want to delete: ");
-            contactList.remove(userDeleteChoice - 1);
+            int userDeleteChoice = input.getInt("Enter number of the contact you want to delete (0 if you want to abort delete process): ");
+            if (!(userDeleteChoice == 0)) {
+                contactList.remove(userDeleteChoice - 1);
+            }
         }
         runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
