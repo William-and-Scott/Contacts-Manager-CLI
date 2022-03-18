@@ -42,3 +42,4 @@ public class Contact {
         isFavorite = favorite;
     }
 }
+
