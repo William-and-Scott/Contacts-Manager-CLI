@@ -25,9 +25,9 @@ import java.util.Scanner;
 
         public boolean yesNo(String prompt){
             System.out.printf("%s", prompt);
-            String yesOrNoString = scanner.nextLine().trim();
+            String yesOrNoString = scanner.nextLine();
 
-            return yesOrNoString.equalsIgnoreCase("Yes") || yesOrNoString.equalsIgnoreCase("y");
+            return yesOrNoString.equalsIgnoreCase("Yes") || yesOrNoString.equalsIgnoreCase("y") || yesOrNoString.length() == 0;
         }
 
         public int getInt (int min, int max) {
@@ -73,6 +73,22 @@ import java.util.Scanner;
             System.out.printf("%s", prompt);
 
             return getInt();
+        }
+
+        public long getLong () {
+            while (true) {
+                try {
+                    return Long.parseLong(getString());
+                }catch (NumberFormatException e) {
+                    System.out.println("That is not a integer!");
+                }
+            }
+        }
+
+        public long getLong (String prompt) {
+            System.out.printf("%s", prompt);
+
+            return getLong();
         }
 
         public double getDouble (double min, double max) {

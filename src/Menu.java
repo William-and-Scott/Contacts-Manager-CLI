@@ -51,7 +51,7 @@ public class Menu {
                 break;
             case 3 :
                 searchContact();
-                runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
+                runProgram = input.yesNo("Return to main menu? (y/n): ");
                 break;
             case 4 :
                 deleteContact();
@@ -107,13 +107,13 @@ public class Menu {
             }
             contactList.add(new Contact(contactName, contactNumber));
 
-            if (!(input.yesNo("Make another contact?"))) {
+            if (!(input.yesNo("Would you like to create another contact? (y/n): "))) {
                 break;
             }
         } while (true);
 
 
-        runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
+        runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
     //dual purpose, could search and delete
     public boolean searchContact () {
@@ -135,10 +135,10 @@ public class Menu {
 
     public void deleteContact () {
         if (searchContact()){
-            int userDeleteChoice = input.getInt("Enter number of contact you want to delete: ");
+            int userDeleteChoice = input.getInt("Enter number of the contact you want to delete: ");
             contactList.remove(userDeleteChoice - 1);
         }
-        runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
+        runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
 
     public void printArrayList () {
@@ -155,7 +155,7 @@ public class Menu {
             System.out.printf("%-20s | %-12s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()));
         }
 
-        runProgram = input.yesNo("Do you want to make another selection? (y/n) ");
+        runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
 
     public String formatNumber (String number) {
@@ -169,8 +169,8 @@ public class Menu {
 
     public String phoneNumberValidator () {
         while (true) {
-            String phoneNumber = String.valueOf(input.getInt("Enter contact phone number (without dashes or spaces): "));
-
+            String phoneNumber = String.valueOf(input.getLong("Enter contact phone number (without dashes or spaces): "));
+            System.out.println(phoneNumber);
             if (phoneNumber.length() == 7 || phoneNumber.length() == 10) {
                 return phoneNumber;
             }
