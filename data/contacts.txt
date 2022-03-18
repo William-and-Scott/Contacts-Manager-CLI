@@ -6,5 +6,6 @@ G. Antetounmpo , 2013844444 , false
 Hailey Garcia , 8759482 , true
 Rickson Gracie , 2105540149 , true
 Ry Sutton , 1234567890 , true
+Sarah Carpenter , 2818817785 , true
 Scott Carpenter , 8472955098 , true
 William Withers , 3612840562 , true
