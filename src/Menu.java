@@ -16,18 +16,43 @@ public class Menu {
     public static void printMenu() {
         System.out.println(ANSI_GREEN_TEXT);
 
-        System.out.println("_____________________________________");
-        System.out.println("|  ☎           Main Menu            |");
-        System.out.println("|___________________________________|");
-        System.out.println("| 1. View contacts.                 |");
-        System.out.println("| 2. View favorites.                |");
-        System.out.println("| 3. Add a new contact.             |");
-        System.out.println("| 4. Edit contact.                  |");
-        System.out.println("| 5. Search a contact by name.      |");
-        System.out.println("| 6. Delete an existing contact.    |");
-        System.out.println("| 7. Exit.                          |");
-        System.out.println("|___________________________________|\n");
-        System.out.print("Enter an option (1, 2, 3, 4, 5 or 6): ");
+        System.out.print("                        _______________________________________\n");
+        System.out.print("                       /                                     /|\n");
+        System.out.print("             _________/_____________________________________/_|________\n");
+        System.out.print("            /                                                        /|\n");
+        System.out.print("           /                                                        / |\n");
+        System.out.print("          /                                                        /  |\n");
+        System.out.print("         /________________________________________________________/   |\n");
+        System.out.print("        |                                                        |    |\n");
+        System.out.print("        |                                                        |    |\n");
+        System.out.print("        |     _______________________________________________    |    |\n");
+        System.out.print("        |     |                                             |    |    |\n");
+        System.out.print("        |     |    _____________________________________    |    |    |\n");
+        System.out.print("        |     |    |  ☎           Main Menu            |    |    |    |\n");
+        System.out.print("        |     |    |___________________________________|    |    |    |\n");
+        System.out.print("        |     |    | 1. View contacts.                 |    |    |    |\n");
+        System.out.print("        |     |    | 2. View favorites.                |    |    |    |\n");
+        System.out.print("        |     |    | 3. Add a new contact.             |    |    |    |\n");
+        System.out.print("        |     |    | 4. Search a contact by name.      |    |    |    |\n");
+        System.out.print("        |     |    | 5. Edit a contact by name.        |    |    |    |\n");
+        System.out.print("        |     |    | 6. Delete an existing contact.    |    |    |    |\n");
+        System.out.print("        |     |    | 7. Exit.                          |    |    |    |    a project by William and Scott\n");
+        System.out.print("        |     |    |___________________________________|    |    |    |======================================================D=\n");
+        System.out.print("        |     |                                             |    |    |\n");
+        System.out.print("        |     |    Enter an option (1, 2, 3, 4, 5 or 6):    |    |    |\n");
+        System.out.print("        |     |_____________________________________________|    |   /\n");
+        System.out.print("        |                                                        |  /\n");
+        System.out.print("        | ====                                                   | /\n");
+        System.out.print("        |________________________________________________________|/\n");
+        System.out.print("        /                                                        /|\n");
+        System.out.print("       /     \"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"      / |\n");
+        System.out.print("      /     ::::::::::::::::::::::::::::::::::::::::::::::     /  /\n");
+        System.out.print("     /   ::: :::::::::::::::::::::::::::::::::::::::::: :::   /  /\n");
+        System.out.print("    /    :::: :::::::::::::::::::::::::::::::::::::::: ::::  /  /\n");
+        System.out.print("   /     ::::: :::::::::::::::::::::::::::::::::::::  ::::: /  /\n");
+        System.out.print("  /      ::: ::: ::: :::::::::::::::::::: ::: ::: :::      /  /\n");
+        System.out.print(" /________________________________________________________/  /\n");
+        System.out.println("|_________________________________________________________|_/\n");
 
     }
 
