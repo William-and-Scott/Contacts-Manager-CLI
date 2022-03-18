@@ -28,14 +28,14 @@ public class Menu {
         System.out.println("| 5. Delete an existing contact.    |");
         System.out.println("| 6. Exit.                          |");
         System.out.println("|___________________________________|\n");
-        System.out.println(" Enter an option (1, 2, 3, 4, 5 or 6):  ");
+        System.out.print("Enter an option (1, 2, 3, 4, 5 or 6): ");
 
 
-        System.out.println();
+
     }
 
     public void getUserChoice() {
-        int userChoice = input.getInt(1, 5);
+        int userChoice = input.getInt(1, 6);
 
         switch (userChoice) {
             case 1:

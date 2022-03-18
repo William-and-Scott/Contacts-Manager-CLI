@@ -25,7 +25,7 @@ import java.util.Scanner;
 
         public boolean yesNo(String prompt){
             System.out.printf("%s", prompt);
-            String yesOrNoString = scanner.nextLine();
+            String yesOrNoString = scanner.nextLine().trim();
 
             return yesOrNoString.equalsIgnoreCase("Yes") || yesOrNoString.equalsIgnoreCase("y") || yesOrNoString.length() == 0;
         }
