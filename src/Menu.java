@@ -61,7 +61,7 @@ public class Menu {
             List<String> tempContactList = Files.readAllLines(dataFile);
             for (int i = 0; i < tempContactList.size(); i++) {
                 String [] chopString = tempContactList.get(i).split(" , ");
-                contactList.add(new Contact(chopString[0], chopString[1]));
+                contactList.add(new Contact(chopString[0], chopString[1] , chopString[2]));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -81,7 +81,7 @@ public class Menu {
     }
 
     public String toString (Contact contact) {
-        return contact.getFullName() + " , " + contact.getPhoneNumber();
+        return contact.getFullName() + " , " + contact.getPhoneNumber() + " , " + contact.isFavorite();
     }
 
     public void addContact () {
@@ -89,17 +89,21 @@ public class Menu {
         do {
             String contactName = fullNameValidator();
             String contactNumber = phoneNumberValidator();
+            String isFavorite = isFavoriteValidator();
+
+
 
             for (Contact contact : contactList) {
                 if (contact.getFullName().equalsIgnoreCase(contactName)) {
                     if (input.yesNo("This entry already exists, would you like to overwrite it? (y/n): ")) {
                     contact.setFullName(contactName);
                     contact.setPhoneNumber(contactNumber);
+                    contact.setFavorite(isFavorite);
                 }
                     return;
                 }
             }
-            contactList.add(new Contact(contactName, contactNumber));
+            contactList.add(new Contact(contactName, contactNumber, isFavorite));
 
             if (!(input.yesNo("Would you like to create another contact? (y/n): "))) {
                 break;
@@ -138,17 +142,28 @@ public class Menu {
     public void printArrayList () {
         String nameColumn = "Name";
         String numColumn = "Phone Number";
+        String favColumn = "Favorite";
 
-        System.out.printf("%-20s | %12s |\n", nameColumn, numColumn);
 
-        for (int i = 0; i < 37; i++) {
+        for (int i = 0; i < 50; i++) {
+            System.out.print("_");
+        }
+
+        System.out.printf("\n| %-20s | %12s | %8s |\n", nameColumn, numColumn, favColumn);
+
+        System.out.print("|");
+        for (int i = 0; i < 48; i++) {
+            System.out.print("-");
+        }
+        System.out.println("|");
+        for (Contact contact : contactList) {
+            System.out.printf("| %-20s | %-12s | %-8s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()), contact.isFavorite());
+        }
+
+        for (int i = 0; i < 50; i++) {
             System.out.print("-");
         }
         System.out.println();
-        for (Contact contact : contactList) {
-            System.out.printf("%-20s | %-12s |\n", contact.getFullName(), formatNumber(contact.getPhoneNumber()));
-        }
-
         runProgram = input.yesNo("Return to main menu? (y/n): ");
     }
 
@@ -184,6 +199,13 @@ public class Menu {
             }
             else System.out.println("Max 20 character, please abbreviate your first name.");
         }
+    }
+
+    public String isFavoriteValidator () {
+        if (input.yesNo("Is this contact a favorite?")) {
+            return "true";
+        }
+        return "false";
     }
 
     //accessors

@@ -2,10 +2,12 @@ public class Contact {
 
     private String fullName;
     private String phoneNumber;
+    private String isFavorite;
 
-    public Contact(String fullName, String phoneNumber) {
+    public Contact(String fullName, String phoneNumber, String isFavorite) {
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
+        this.isFavorite = isFavorite;
     }
 
 
@@ -26,5 +28,13 @@ public class Contact {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String isFavorite() {
+        return isFavorite;
+    }
+
+    public void setFavorite(String favorite) {
+        isFavorite = favorite;
     }
 }
