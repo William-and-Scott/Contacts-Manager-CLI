@@ -121,15 +121,37 @@ public class Menu {
 
     //dual purpose, could search and delete
     public boolean searchContact() {
+
         String searchedName = input.getString("Enter a contacts name: ");
+
         int count = 0;
+        String nameColumn = "Name";
+        String numColumn = "Phone Number";
+        String favColumn = "Favorite";
+        for (int i = 0; i < 56; i++) {
+            System.out.print("_");
+        }
+        System.out.printf("\n| %-26s | %12s | %8s |\n", nameColumn, numColumn, favColumn);
+
+        System.out.print("|");
+        for (int j = 0; j < 54; j++) {
+            System.out.print("-");
+        }
+        System.out.println("|");
 
         for (int i = 0; i < contactList.size(); i++) {
             if (contactList.get(i).getFullName().toLowerCase().contains(searchedName.toLowerCase())) {
                 count++;
-                System.out.println((i + 1) + ". Name: " + contactList.get(i).getFullName() + ", Phone number: " + formatNumber(contactList.get(i).getPhoneNumber()));
+                System.out.printf("| %s. %-23s | %-12s | %8s |\n", i+1, contactList.get(i).getFullName(), formatNumber(contactList.get(i).getPhoneNumber()), contactList.get(i).isFavorite());
             }
         }
+
+        for (int i = 0; i < 56; i++) {
+            System.out.print("-");
+        }
+        System.out.println();
+
+
         if (count == 0) {
             System.out.println("Could not find contact with that name.");
             return false;
