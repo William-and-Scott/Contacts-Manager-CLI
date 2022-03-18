@@ -260,7 +260,7 @@ public class Menu {
     }
 
     public String isFavoriteValidator() {
-        if (input.yesNo("Is this contact a favorite?")) {
+        if (input.yesNo("Is this contact a favorite? (y/n): ")) {
             return "true";
         }
         return "false";
